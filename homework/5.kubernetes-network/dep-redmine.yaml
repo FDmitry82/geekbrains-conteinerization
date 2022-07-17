@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: test-redmine
 spec:
-  replicas: 1.0
+  replicas: 1
   selector:
     matchLabels:
       app: test-redmine
@@ -24,17 +24,17 @@ spec:
         env:
         - name: REDMINE_DB_POSTGRES
           value: database
-        - name: REDMINE_DB_USER
+        - name: POSTGRES_USER
           value: RedmineUser    
-        - name: REDMINE_DB_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: redmine-secret
-              key: REDMINE_PASSWORD
-        - name: REDMINE_DB_DATABASE
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: REDMINE_DB_POSTGRES
           value: testdbredmine
-        - name: REDMINE_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: redmine-secret
-              key: REDMINE_PASSWORD
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
